@@ -1,10 +1,7 @@
 
 package com.example.salariati.electra;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.Set;
@@ -13,16 +10,32 @@ import java.util.Set;
 public class Controler {
 
     @PostMapping("/addAngajat")
-    String addAngajat (@RequestParam String nume, @RequestParam String prenume, @RequestParam int salar , @RequestParam String functie , @RequestParam String nivel ) throws SQLException {
-        if (Metode.addAngajat(nume, prenume, salar, functie, nivel).equals("false")) {
-            return nume + " " + prenume + " este deja inregistrat";
-        }
-        return nume + " " + prenume + " este inregistrat";
-
+    String addAngajat(@RequestParam String nume, @RequestParam String prenume, @RequestParam int salar, @RequestParam String functie, @RequestParam String nivel) throws SQLException {
+        return Metode.addAngajat(nume, prenume, salar, functie, nivel);
     }
+
+
     @GetMapping("/startWork")
     Set<String> startWork() throws SQLException {
         return Metode.startWorking();
     }
 
+    @GetMapping("/allAngajati")
+    Set<String> allAngajati() throws SQLException {
+        return Metode.allPersons();
+    }
+
+    @GetMapping("/selectAngajat")
+    int selectAngajat(@RequestParam String nume, @RequestParam String prenume) throws SQLException {
+        return Metode.selectPerson(nume, prenume);
+    }
+
+    @PostMapping("/changeSlariu")
+    String change(@RequestBody int id, int salariuModificat) throws SQLException {
+        if (id != 0) {
+            Metode.change(id, salariuModificat);
+            return "A fost modificatr cu succes";
+        }
+        return "Persoana nu este in baza de date";
+    }
 }

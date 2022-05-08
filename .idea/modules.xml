@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/Desktop/FirstWebProject/FirstWebProject.iml" filepath="$USER_HOME$/Desktop/FirstWebProject/FirstWebProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/salariati/salariati.iml" filepath="$PROJECT_DIR$/salariati/salariati.iml" />
     </modules>
   </component>
