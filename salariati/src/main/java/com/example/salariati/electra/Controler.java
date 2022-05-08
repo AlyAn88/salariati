@@ -30,7 +30,7 @@ public class Controler {
         return Metode.selectPerson(nume, prenume);
     }
 
-    @PostMapping("/changeSlariu")
+    @PostMapping("/changeSalariu")
     String change(@RequestBody int id, int salariuModificat) throws SQLException {
         if (id != 0) {
             Metode.change(id, salariuModificat);
