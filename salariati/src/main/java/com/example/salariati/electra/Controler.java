@@ -31,7 +31,7 @@ public class Controler {
     }
 
     @PostMapping("/changeSalariu")
-    String change(@RequestBody int id, int salariuModificat) throws SQLException {
+    String change(@RequestBody int id,  @RequestParam int salariuModificat) throws SQLException {
         if (id != 0) {
             Metode.change(id, salariuModificat);
             return "A fost modificatr cu succes";
