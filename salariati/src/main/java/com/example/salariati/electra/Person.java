@@ -1,18 +1,21 @@
 package com.example.salariati.electra;
 
-public class Person {
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonDeserialize(using = ADeserializer.class)
+public abstract class Person implements Comparable<Person> {
     private String nume;
     private String prenume;
     private int salariu;
-    private String numeFunctie;
-    private String nivel;
+    private Functie functie;
 
-    public void setAngajat(String nume, String prenume, int salariu, String numeFunctie, String nivel) {
+    abstract String isWorking();
+
+    public void setAngajat(String nume, String prenume, int salariu, Functie functie) {
         this.nume = nume;
         this.prenume = prenume;
         this.salariu = salariu;
-        this.numeFunctie = numeFunctie;
-        this.nivel = nivel;
+        this.functie = functie;
     }
 
     public String getNume() {
@@ -39,19 +42,24 @@ public class Person {
         this.salariu = salariu;
     }
 
-    public String getNumeFunctie() {
-        return numeFunctie;
+    public Functie getFunctie() {
+        return functie;
     }
 
-    public void setNumeFunctie(String numeFunctie) {
-        this.numeFunctie = numeFunctie;
+    public void setFunctie(Functie functie) {
+        this.functie = functie;
     }
 
-    public String getNivel() {
-        return nivel;
-    }
+    @Override
+    public int compareTo(Person o) {
+        int i = this.nume.compareTo(o.getNume());
+        if (i == 0) {
+            i = this.prenume.compareTo(o.getPrenume());
+            return i;
+        }
 
-    public void setNivel(String nivel) {
-        this.nivel = nivel;
+        return i;
     }
 }
+
+

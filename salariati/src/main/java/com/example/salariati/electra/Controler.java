@@ -5,13 +5,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.Set;
-
+@CrossOrigin(origins = "*")
 @RestController
 public class Controler {
 
     @PostMapping("/addAngajat")
-    String addAngajat(@RequestParam String nume, @RequestParam String prenume, @RequestParam int salar, @RequestParam String functie, @RequestParam String nivel) throws SQLException {
-        return Metode.addAngajat(nume, prenume, salar, functie, nivel);
+    String addAngajat(@RequestBody Person p) throws SQLException {
+        return Metode.addAngajat(p.getNume(), p.getPrenume(), p.getSalariu(), p.getFunctie());
     }
 
 
@@ -21,7 +21,7 @@ public class Controler {
     }
 
     @GetMapping("/allAngajati")
-    Set<String> allAngajati() throws SQLException {
+    Set<Person> allAngajati() throws SQLException {
         return Metode.allPersons();
     }
 
@@ -30,7 +30,7 @@ public class Controler {
         return Metode.selectPerson(nume, prenume);
     }
 
-    @PostMapping("/changeSalariu")
+    @PutMapping("/changeSalariu")
     String change(@RequestBody int id,  @RequestParam int salariuModificat) throws SQLException {
         if (id != 0) {
             Metode.change(id, salariuModificat);
